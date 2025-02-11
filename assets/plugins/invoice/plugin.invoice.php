@@ -13,6 +13,7 @@ switch ($modx->event->name) {
             if (!empty($order['hash']) && $order['hash'] == $hash && isset($params['page'])) {
                 $modx->systemCacheKey = '';
                 $processor->getCart();
+                $order['status'] = ci()->statuses->getStatus($order['status_id']);
                 $modx->toPlaceholders(['order' => $order]);
                 $modx->sendForward($params['page']);
             }
